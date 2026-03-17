@@ -1,13 +1,13 @@
+let usuarioActual=null
+let pesos=[]
+
 function showSection(id){
 
 let sections=["home","register","login","dashboard","patologias","rutina","dieta","prevencion","calendario","editarCuenta","progreso"]
 
 sections.forEach(sec=>{
-
 let el=document.getElementById(sec)
-
 if(el) el.style.display="none"
-
 })
 
 document.getElementById(id).style.display="block"
@@ -17,7 +17,6 @@ document.getElementById(id).style.display="block"
 function register(){
 
 let user={
-
 name:regName.value,
 email:regEmail.value,
 pass:regPass.value,
@@ -25,7 +24,6 @@ age:regAge.value,
 weight:regWeight.value,
 height:regHeight.value,
 sex:regSex.value
-
 }
 
 localStorage.setItem(user.email,JSON.stringify(user))
@@ -44,24 +42,22 @@ let pass=logPass.value
 let data=localStorage.getItem(email)
 
 if(!data){
-
 alert("Usuario no existe")
 return
-
 }
 
 let user=JSON.parse(data)
 
 if(user.pass!==pass){
-
 alert("Contraseña incorrecta")
 return
-
 }
+
+usuarioActual=user
 
 let imc=user.weight/((user.height/100)*(user.height/100))
 
-document.getElementById("imc").innerText="📊 Tu IMC es: "+imc.toFixed(2)
+document.getElementById("imc").innerText="📊 IMC: "+imc.toFixed(2)
 
 showSection("dashboard")
 
@@ -70,11 +66,9 @@ showSection("dashboard")
 function guardarSalud(){
 
 let salud={
-
 lesion:lesion.value,
 enfermedad:enfermedad.value,
 cirugia:cirugia.value
-
 }
 
 localStorage.setItem("salud",JSON.stringify(salud))
@@ -89,20 +83,19 @@ showSection("rutina")
 
 rutina.innerHTML=`
 
-<h2>💪 Rutina semanal detallada</h2>
+<h2>💪 Rutina semanal</h2>
 
 <h3>Lunes - Pecho</h3>
-<p>Press de banca — 4 series — 8 repeticiones</p>
-<p>Descanso: 90 segundos</p>
-<p>Técnica: bajar la barra controladamente al pecho y subir</p>
+<p>Press banca — 4x8 — descanso 90s</p>
+<p>Aperturas con mancuernas — 3x12</p>
 
 <h3>Martes - Espalda</h3>
 <p>Jalón al pecho — 4x10</p>
-<p>Remo en máquina — 3x10</p>
+<p>Remo máquina — 3x10</p>
 
 <h3>Miércoles - Pierna</h3>
 <p>Sentadilla guiada — 4x10</p>
-<p>Prensa de pierna — 4x12</p>
+<p>Prensa — 4x12</p>
 
 <h3>Jueves - Hombro</h3>
 <p>Press militar — 4x8</p>
@@ -112,10 +105,11 @@ rutina.innerHTML=`
 <p>Curl bíceps — 4x10</p>
 <p>Extensión tríceps — 3x12</p>
 
-<h3>Sábado - Cardio</h3>
-<p>Caminadora — 25 minutos</p>
+<h3>Sábado</h3>
+<p>Cardio 25 minutos</p>
 
-<h3>Domingo - Descanso</h3>
+<h3>Domingo</h3>
+<p>Descanso</p>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
 
@@ -129,11 +123,11 @@ showSection("dieta")
 
 dieta.innerHTML=`
 
-<h2>🥗 Plan Alimenticio</h2>
+<h2>🥗 Plan Alimenticio IA</h2>
 
 <input id="alergias" placeholder="Escribe tus alergias">
 
-<button onclick="generarDieta()">Generar plan semanal</button>
+<button onclick="generarDieta()">Generar</button>
 
 <div id="plan"></div>
 
@@ -145,26 +139,24 @@ dieta.innerHTML=`
 
 function generarDieta(){
 
-let dias=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"]
-
 let desayunos=[
-"Avena con plátano y nueces",
-"Huevos con espinaca",
+"Avena con plátano",
+"Omelette de claras",
 "Yogurt con granola",
-"Tostadas integrales con aguacate",
+"Pan integral con aguacate",
 "Batido de proteína",
-"Pan integral con crema de cacahuate",
-"Omelette de claras"
+"Tostadas integrales",
+"Huevos con espinaca"
 ]
 
 let comidas=[
 "Pollo con arroz integral",
-"Carne con papas",
 "Salmón con quinoa",
+"Carne magra con papas",
 "Pasta integral con pollo",
-"Tacos de pollo",
+"Tacos saludables",
 "Arroz con atún",
-"Ensalada con pollo"
+"Ensalada de pollo"
 ]
 
 let cenas=[
@@ -177,6 +169,8 @@ let cenas=[
 "Ensalada de garbanzos"
 ]
 
+let dias=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"]
+
 let html=""
 
 for(let i=0;i<7;i++){
@@ -184,74 +178,14 @@ for(let i=0;i<7;i++){
 html+=`
 
 <h3>${dias[i]}</h3>
-
 <p>🍳 Desayuno: ${desayunos[i]}</p>
 <p>🍗 Comida: ${comidas[i]}</p>
 <p>🥗 Cena: ${cenas[i]}</p>
-
 `
 
 }
 
-document.getElementById("plan").innerHTML=html
-
-}
-
-function openPrevencion(){
-
-showSection("prevencion")
-
-prevencion.innerHTML=`
-
-<h2>⚠ Prevención</h2>
-
-<h3>Rabdomiólisis</h3>
-<p>Condición grave causada por daño muscular extremo.</p>
-<p>Síntomas: dolor muscular intenso, debilidad, orina oscura.</p>
-
-<h3>Lesiones por sobrecarga</h3>
-<p>Tendinitis, desgarros musculares y dolor articular.</p>
-
-<h3>Golpe de calor</h3>
-<p>Ocurre cuando el cuerpo no puede regular su temperatura.</p>
-
-<h3>Deshidratación</h3>
-<p>Pérdida excesiva de líquidos durante el ejercicio.</p>
-
-<h3>Sobreentrenamiento</h3>
-<p>Fatiga constante causada por falta de descanso.</p>
-
-<button onclick="showSection('dashboard')">⬅ Volver</button>
-
-`
-
-}
-
-function openCalendario(){
-
-showSection("calendario")
-
-calendario.innerHTML=`
-
-<h2>📅 Calendario de entrenamiento</h2>
-
-<table>
-
-<tr><th>Día</th><th>Entrenamiento</th></tr>
-
-<tr><td>Lunes</td><td>Pecho</td></tr>
-<tr><td>Martes</td><td>Espalda</td></tr>
-<tr><td>Miércoles</td><td>Pierna</td></tr>
-<tr><td>Jueves</td><td>Hombro</td></tr>
-<tr><td>Viernes</td><td>Brazos</td></tr>
-<tr><td>Sábado</td><td>Cardio</td></tr>
-<tr><td>Domingo</td><td>Descanso</td></tr>
-
-</table>
-
-<button onclick="showSection('dashboard')">⬅ Volver</button>
-
-`
+plan.innerHTML=html
 
 }
 
@@ -261,13 +195,17 @@ showSection("editarCuenta")
 
 editarCuenta.innerHTML=`
 
-<h2>⚙ Editar cuenta</h2>
+<h2>⚙ Editar Cuenta</h2>
 
-<input placeholder="Nuevo peso">
+<input id="nuevoNombre" placeholder="Nuevo nombre">
 
-<input placeholder="Nueva altura">
+<input id="nuevaEdad" placeholder="Nueva edad">
 
-<button>Guardar cambios</button>
+<input id="nuevoPeso" placeholder="Nuevo peso">
+
+<input id="nuevaAltura" placeholder="Nueva altura">
+
+<button onclick="guardarCambios()">Guardar</button>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
 
@@ -275,7 +213,18 @@ editarCuenta.innerHTML=`
 
 }
 
-let pesos=[]
+function guardarCambios(){
+
+usuarioActual.name=nuevoNombre.value || usuarioActual.name
+usuarioActual.age=nuevaEdad.value || usuarioActual.age
+usuarioActual.weight=nuevoPeso.value || usuarioActual.weight
+usuarioActual.height=nuevaAltura.value || usuarioActual.height
+
+localStorage.setItem(usuarioActual.email,JSON.stringify(usuarioActual))
+
+alert("Datos actualizados")
+
+}
 
 function openProgreso(){
 
@@ -283,7 +232,7 @@ showSection("progreso")
 
 progreso.innerHTML=`
 
-<h2>📊 Progreso semanal</h2>
+<h2>📊 Progreso</h2>
 
 <input id="pesoSemana" placeholder="Peso esta semana">
 
@@ -299,16 +248,14 @@ progreso.innerHTML=`
 
 function agregarPeso(){
 
-let peso=parseFloat(document.getElementById("pesoSemana").value)
+let peso=parseFloat(pesoSemana.value)
 
 pesos.push(peso)
 
 let ctx=document.getElementById("grafica")
 
 new Chart(ctx,{
-
 type:"line",
-
 data:{
 labels:pesos.map((_,i)=>"Semana "+(i+1)),
 datasets:[{
@@ -316,7 +263,6 @@ label:"Peso corporal",
 data:pesos
 }]
 }
-
 })
 
 }
