@@ -1,6 +1,6 @@
 function showSection(id){
 
-let sections=["home","register","login","dashboard","patologias","rutina","dieta","prevencion","calendario"]
+let sections=["home","register","login","dashboard","patologias","rutina","dieta","prevencion","calendario","editarCuenta","progreso"]
 
 sections.forEach(sec=>{
 
@@ -87,31 +87,38 @@ function openRutina(){
 
 showSection("rutina")
 
-rutina.innerHTML=
+rutina.innerHTML=`
 
-`<h2>💪 Rutina semanal</h2>
+<h2>💪 Rutina semanal detallada</h2>
 
-<p>Lunes: Pecho</p>
-<p>Press banca — 4x8 — descanso 90s</p>
+<h3>Lunes - Pecho</h3>
+<p>Press de banca — 4 series — 8 repeticiones</p>
+<p>Descanso: 90 segundos</p>
+<p>Técnica: bajar la barra controladamente al pecho y subir</p>
 
-<p>Martes: Espalda</p>
+<h3>Martes - Espalda</h3>
 <p>Jalón al pecho — 4x10</p>
+<p>Remo en máquina — 3x10</p>
 
-<p>Miércoles: Pierna</p>
+<h3>Miércoles - Pierna</h3>
 <p>Sentadilla guiada — 4x10</p>
+<p>Prensa de pierna — 4x12</p>
 
-<p>Jueves: Hombro</p>
+<h3>Jueves - Hombro</h3>
 <p>Press militar — 4x8</p>
+<p>Elevaciones laterales — 3x12</p>
 
-<p>Viernes: Brazos</p>
+<h3>Viernes - Brazos</h3>
 <p>Curl bíceps — 4x10</p>
+<p>Extensión tríceps — 3x12</p>
 
-<p>Sábado: Cardio</p>
-<p>Caminadora 25 min</p>
+<h3>Sábado - Cardio</h3>
+<p>Caminadora — 25 minutos</p>
 
-<p>Domingo: Descanso</p>
+<h3>Domingo - Descanso</h3>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
+
 `
 
 }
@@ -120,46 +127,73 @@ function openDieta(){
 
 showSection("dieta")
 
-dieta.innerHTML=
+dieta.innerHTML=`
 
-`<h2>🥗 Plan Alimenticio IA</h2>
+<h2>🥗 Plan Alimenticio</h2>
 
-<input id="alergias" placeholder="Ingresa alergias">
+<input id="alergias" placeholder="Escribe tus alergias">
 
-<button onclick="generarDieta()">Generar plan</button>
+<button onclick="generarDieta()">Generar plan semanal</button>
 
 <div id="plan"></div>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
+
 `
 
 }
 
 function generarDieta(){
 
-let alergias=document.getElementById("alergias").value
-
-let plan=""
-
 let dias=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"]
 
-dias.forEach(d=>{
+let desayunos=[
+"Avena con plátano y nueces",
+"Huevos con espinaca",
+"Yogurt con granola",
+"Tostadas integrales con aguacate",
+"Batido de proteína",
+"Pan integral con crema de cacahuate",
+"Omelette de claras"
+]
 
-plan+=`
+let comidas=[
+"Pollo con arroz integral",
+"Carne con papas",
+"Salmón con quinoa",
+"Pasta integral con pollo",
+"Tacos de pollo",
+"Arroz con atún",
+"Ensalada con pollo"
+]
 
-<h3>${d}</h3>
+let cenas=[
+"Ensalada con atún",
+"Wrap integral de pollo",
+"Sopa de verduras",
+"Ensalada de huevo",
+"Pollo con verduras",
+"Quesadilla integral",
+"Ensalada de garbanzos"
+]
 
-<p>Desayuno: Avena con fruta</p>
+let html=""
 
-<p>Comida: Pollo con arroz</p>
+for(let i=0;i<7;i++){
 
-<p>Cena: Ensalada con atún</p>
+html+=`
+
+<h3>${dias[i]}</h3>
+
+<p>🍳 Desayuno: ${desayunos[i]}</p>
+<p>🍗 Comida: ${comidas[i]}</p>
+<p>🥗 Cena: ${cenas[i]}</p>
 
 `
 
-})
+}
 
-document.getElementById("plan").innerHTML=plan
+document.getElementById("plan").innerHTML=html
 
 }
 
@@ -167,37 +201,25 @@ function openPrevencion(){
 
 showSection("prevencion")
 
-prevencion.innerHTML=
+prevencion.innerHTML=`
 
-`<h2>⚠ Prevención</h2>
+<h2>⚠ Prevención</h2>
 
 <h3>Rabdomiólisis</h3>
-
-<p>Es una condición donde el tejido muscular se descompone por esfuerzo extremo.</p>
-
-<p>Síntomas:</p>
-
-<p>dolor muscular severo</p>
-<p>debilidad</p>
-<p>orina oscura</p>
+<p>Condición grave causada por daño muscular extremo.</p>
+<p>Síntomas: dolor muscular intenso, debilidad, orina oscura.</p>
 
 <h3>Lesiones por sobrecarga</h3>
-
-<p>Tendinitis</p>
-<p>desgarros musculares</p>
-<p>dolor articular</p>
+<p>Tendinitis, desgarros musculares y dolor articular.</p>
 
 <h3>Golpe de calor</h3>
-
-<p>Exceso de temperatura corporal durante el ejercicio.</p>
+<p>Ocurre cuando el cuerpo no puede regular su temperatura.</p>
 
 <h3>Deshidratación</h3>
-
-<p>Pérdida de líquidos por sudor.</p>
+<p>Pérdida excesiva de líquidos durante el ejercicio.</p>
 
 <h3>Sobreentrenamiento</h3>
-
-<p>Fatiga crónica por entrenar sin descanso suficiente.</p>
+<p>Fatiga constante causada por falta de descanso.</p>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
 
@@ -209,56 +231,92 @@ function openCalendario(){
 
 showSection("calendario")
 
-calendario.innerHTML=
+calendario.innerHTML=`
 
-`<h2>📅 Calendario de entrenamiento</h2>
+<h2>📅 Calendario de entrenamiento</h2>
 
 <table>
 
-<tr>
-<th>Día</th>
-<th>Entrenamiento</th>
-</tr>
+<tr><th>Día</th><th>Entrenamiento</th></tr>
 
-<tr>
-<td>Lunes</td>
-<td>Pecho</td>
-</tr>
-
-<tr>
-<td>Martes</td>
-<td>Espalda</td>
-</tr>
-
-<tr>
-<td>Miércoles</td>
-<td>Pierna</td>
-</tr>
-
-<tr>
-<td>Jueves</td>
-<td>Hombro</td>
-</tr>
-
-<tr>
-<td>Viernes</td>
-<td>Brazos</td>
-</tr>
-
-<tr>
-<td>Sábado</td>
-<td>Cardio</td>
-</tr>
-
-<tr>
-<td>Domingo</td>
-<td>Descanso</td>
-</tr>
+<tr><td>Lunes</td><td>Pecho</td></tr>
+<tr><td>Martes</td><td>Espalda</td></tr>
+<tr><td>Miércoles</td><td>Pierna</td></tr>
+<tr><td>Jueves</td><td>Hombro</td></tr>
+<tr><td>Viernes</td><td>Brazos</td></tr>
+<tr><td>Sábado</td><td>Cardio</td></tr>
+<tr><td>Domingo</td><td>Descanso</td></tr>
 
 </table>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
 
 `
+
+}
+
+function editarCuenta(){
+
+showSection("editarCuenta")
+
+editarCuenta.innerHTML=`
+
+<h2>⚙ Editar cuenta</h2>
+
+<input placeholder="Nuevo peso">
+
+<input placeholder="Nueva altura">
+
+<button>Guardar cambios</button>
+
+<button onclick="showSection('dashboard')">⬅ Volver</button>
+
+`
+
+}
+
+let pesos=[]
+
+function openProgreso(){
+
+showSection("progreso")
+
+progreso.innerHTML=`
+
+<h2>📊 Progreso semanal</h2>
+
+<input id="pesoSemana" placeholder="Peso esta semana">
+
+<button onclick="agregarPeso()">Agregar</button>
+
+<canvas id="grafica"></canvas>
+
+<button onclick="showSection('dashboard')">⬅ Volver</button>
+
+`
+
+}
+
+function agregarPeso(){
+
+let peso=parseFloat(document.getElementById("pesoSemana").value)
+
+pesos.push(peso)
+
+let ctx=document.getElementById("grafica")
+
+new Chart(ctx,{
+
+type:"line",
+
+data:{
+labels:pesos.map((_,i)=>"Semana "+(i+1)),
+datasets:[{
+label:"Peso corporal",
+data:pesos
+}]
+}
+
+})
 
 }
