@@ -30,7 +30,7 @@ sex:regSex.value
 
 localStorage.setItem(user.email,JSON.stringify(user))
 
-alert("Cuenta creada")
+alert("Cuenta creada correctamente")
 
 showSection("login")
 
@@ -59,17 +59,11 @@ return
 
 }
 
-showDashboard(user)
-
-}
-
-function showDashboard(user){
-
-showSection("dashboard")
-
 let imc=user.weight/((user.height/100)*(user.height/100))
 
-document.getElementById("imc").innerText="IMC: "+imc.toFixed(2)
+document.getElementById("imc").innerText="Tu IMC es: "+imc.toFixed(2)
+
+showSection("dashboard")
 
 }
 
@@ -89,87 +83,64 @@ alert("Datos guardados")
 
 }
 
-function generarRutina(){
+function openRutina(){
 
-return `
+showSection("rutina")
 
-<h2>Rutina Semanal</h2>
+rutina.innerHTML=
+
+`<h2>Rutina semanal</h2>
 
 <h3>Lunes - Pecho</h3>
-
 <p>Máquina: Press de banca</p>
-
 <p>Series: 4</p>
-
 <p>Repeticiones: 8</p>
-
 <p>Tiempo por serie: 40 segundos</p>
-
 <p>Descanso: 90 segundos</p>
 
 <h3>Martes - Espalda</h3>
-
 <p>Máquina: Jalón al pecho</p>
-
 <p>Series: 4</p>
-
 <p>Repeticiones: 10</p>
-
-<p>Tiempo por serie: 45 segundos</p>
-
 <p>Descanso: 90 segundos</p>
 
 <h3>Miércoles - Pierna</h3>
-
 <p>Máquina: Sentadilla guiada</p>
-
 <p>Series: 4</p>
-
 <p>Repeticiones: 10</p>
-
-<p>Tiempo por serie: 45 segundos</p>
-
 <p>Descanso: 120 segundos</p>
 
 <h3>Jueves - Hombro</h3>
-
 <p>Máquina: Press militar</p>
-
 <p>Series: 4</p>
-
 <p>Repeticiones: 8</p>
 
-<p>Descanso: 90 segundos</p>
-
 <h3>Viernes - Brazos</h3>
-
 <p>Máquina: Curl bíceps</p>
-
 <p>Series: 4</p>
-
 <p>Repeticiones: 10</p>
 
-<p>Descanso: 60 segundos</p>
-
 <h3>Sábado - Cardio</h3>
-
 <p>Caminadora</p>
-
 <p>Tiempo: 25 minutos</p>
 
 <h3>Domingo - Descanso</h3>
+
+<button onclick="showSection('dashboard')">⬅ Volver al menú</button>
 
 `
 
 }
 
-function generarDieta(){
+function openDieta(){
 
-return `
+showSection("dieta")
 
-<h2>Plan Alimenticio</h2>
+dieta.innerHTML=
 
-<h3>Indica tus alergias</h3>
+`<h2>Plan Alimenticio</h2>
+
+<h3>Alergias</h3>
 
 <input placeholder="Ej: lactosa, gluten">
 
@@ -184,9 +155,7 @@ return `
 <p>Ingredientes:</p>
 
 <p>60g avena</p>
-
 <p>1 plátano</p>
-
 <p>200ml leche</p>
 
 <h4>Comida</h4>
@@ -196,10 +165,8 @@ return `
 <p>Pollo con arroz</p>
 
 <p>150g pollo</p>
-
 <p>100g arroz integral</p>
-
-<p>Verduras</p>
+<p>verduras</p>
 
 <h4>Cena</h4>
 
@@ -207,71 +174,50 @@ return `
 
 <p>Ensalada con atún</p>
 
-<p>1 lata atún</p>
-
+<p>1 lata de atún</p>
 <p>lechuga</p>
-
 <p>tomate</p>
+
+<button onclick="showSection('dashboard')">⬅ Volver al menú</button>
 
 `
 
 }
 
-function generarPrevencion(){
+function openPrevencion(){
 
-return `
+showSection("prevencion")
 
-<h2>Prevención</h2>
+prevencion.innerHTML=
+
+`<h2>Prevención</h2>
 
 <img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b">
 
 <h3>Rabdomiólisis</h3>
 
-<p>Daño muscular severo causado por ejercicio extremo.</p>
+<p>Daño muscular grave causado por sobreentrenamiento.</p>
 
-<p>Síntomas: dolor intenso, debilidad, orina oscura.</p>
+<p>Síntomas:</p>
+
+<p>dolor intenso</p>
+<p>orina oscura</p>
+<p>debilidad muscular</p>
 
 <h3>Sobreentrenamiento</h3>
 
-<p>Fatiga constante, bajo rendimiento y riesgo de lesión.</p>
+<p>Fatiga constante y pérdida de rendimiento.</p>
 
 <h3>Golpe de calor</h3>
 
-<p>El cuerpo pierde capacidad de regular la temperatura.</p>
+<p>El cuerpo pierde la capacidad de regular la temperatura.</p>
 
 <h3>Deshidratación</h3>
 
-<p>La falta de agua reduce el rendimiento físico.</p>
+<p>Pérdida excesiva de líquidos durante el ejercicio.</p>
+
+<button onclick="showSection('dashboard')">⬅ Volver al menú</button>
 
 `
 
 }
-
-document.addEventListener("click",function(e){
-
-if(e.target.innerText==="Rutina"){
-
-showSection("rutina")
-
-rutina.innerHTML=generarRutina()
-
-}
-
-if(e.target.innerText==="Plan Alimenticio"){
-
-showSection("dieta")
-
-dieta.innerHTML=generarDieta()
-
-}
-
-if(e.target.innerText==="Prevención"){
-
-showSection("prevencion")
-
-prevencion.innerHTML=generarPrevencion()
-
-}
-
-})
-
