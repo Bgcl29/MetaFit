@@ -3,16 +3,24 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MetaFit</title>
+
 <link rel="stylesheet" href="styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
 <header>
+
 <h1>🏋️ MetaFit</h1>
+
 </header>
 
 <div class="container">
@@ -80,6 +88,10 @@
 
 <div class="card" onclick="openCalendario()">📅 Calendario</div>
 
+<div class="card" onclick="editarCuenta()">⚙ Editar Cuenta</div>
+
+<div class="card" onclick="openProgreso()">📊 Progreso</div>
+
 </div>
 
 </div>
@@ -94,7 +106,7 @@
 
 <button onclick="guardarSalud()">Guardar</button>
 
-<button onclick="showSection('dashboard')">⬅ Volver al menú</button>
+<button onclick="showSection('dashboard')">⬅ Volver</button>
 
 </div>
 
@@ -105,6 +117,10 @@
 <div id="prevencion" class="hidden"></div>
 
 <div id="calendario" class="hidden"></div>
+
+<div id="editarCuenta" class="hidden"></div>
+
+<div id="progreso" class="hidden"></div>
 
 </div>
 
