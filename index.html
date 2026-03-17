@@ -3,33 +3,27 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MetaFit</title>
-
 <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
 
 <header>
-
-<h1>MetaFit</h1>
-
+<h1>🏋️ MetaFit</h1>
 </header>
 
 <div class="container">
 
 <div id="home">
 
-<h2>Bienvenido a MetaFit</h2>
+<h2>Bienvenido</h2>
 
-<button onclick="showSection('register')">Crear cuenta</button>
+<button onclick="showSection('register')">📝 Crear cuenta</button>
 
-<button onclick="showSection('login')">Iniciar sesión</button>
+<button onclick="showSection('login')">🔐 Iniciar sesión</button>
 
 </div>
 
@@ -38,23 +32,15 @@
 <h2>Registro</h2>
 
 <input id="regName" placeholder="Nombre completo">
-
 <input id="regEmail" placeholder="Correo">
-
 <input id="regPass" type="password" placeholder="Contraseña">
-
 <input id="regAge" placeholder="Edad">
-
 <input id="regWeight" placeholder="Peso (kg)">
-
 <input id="regHeight" placeholder="Altura (cm)">
 
 <select id="regSex">
-
 <option>Masculino</option>
-
 <option>Femenino</option>
-
 </select>
 
 <button onclick="register()">Registrarse</button>
@@ -68,7 +54,6 @@
 <h2>Iniciar sesión</h2>
 
 <input id="logEmail" placeholder="Correo">
-
 <input id="logPass" type="password" placeholder="Contraseña">
 
 <button onclick="login()">Entrar</button>
@@ -85,13 +70,15 @@
 
 <div class="menu">
 
-<div class="card" onclick="openRutina()">Rutina</div>
+<div class="card" onclick="openRutina()">💪 Rutina</div>
 
-<div class="card" onclick="openDieta()">Plan Alimenticio</div>
+<div class="card" onclick="openDieta()">🥗 Plan Alimenticio</div>
 
-<div class="card" onclick="showSection('patologias')">Patologías</div>
+<div class="card" onclick="showSection('patologias')">🩺 Patologías</div>
 
-<div class="card" onclick="openPrevencion()">Prevención</div>
+<div class="card" onclick="openPrevencion()">⚠ Prevención</div>
+
+<div class="card" onclick="openCalendario()">📅 Calendario</div>
 
 </div>
 
@@ -99,12 +86,10 @@
 
 <div id="patologias" class="hidden">
 
-<h2>Patologías</h2>
+<h2>🩺 Patologías</h2>
 
 <input id="lesion" placeholder="Lesiones">
-
 <input id="enfermedad" placeholder="Enfermedades">
-
 <input id="cirugia" placeholder="Cirugías previas">
 
 <button onclick="guardarSalud()">Guardar</button>
@@ -118,6 +103,8 @@
 <div id="dieta" class="hidden"></div>
 
 <div id="prevencion" class="hidden"></div>
+
+<div id="calendario" class="hidden"></div>
 
 </div>
 
