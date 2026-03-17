@@ -1,59 +1,45 @@
-function showRegister(){
+function showSection(id){
 
-document.getElementById("home").style.display="none"
-document.getElementById("register").style.display="block"
+let sections=["home","register","login","dashboard","patologias","rutina","dieta","prevencion"]
 
-}
+sections.forEach(sec=>{
 
-function showLogin(){
+let el=document.getElementById(sec)
 
-document.getElementById("home").style.display="none"
-document.getElementById("login").style.display="block"
+if(el) el.style.display="none"
+
+})
+
+document.getElementById(id).style.display="block"
 
 }
 
 function register(){
 
-let name=document.getElementById("regName").value
-let email=document.getElementById("regEmail").value
-let pass=document.getElementById("regPass").value
-let age=document.getElementById("regAge").value
-let weight=document.getElementById("regWeight").value
-let height=document.getElementById("regHeight").value
-let sex=document.getElementById("regSex").value
-
-if(!name || !email || !pass){
-
-alert("Completa todos los campos")
-return
-
-}
-
 let user={
 
-name:name,
-email:email,
-pass:pass,
-age:age,
-weight:weight,
-height:height,
-sex:sex
+name:regName.value,
+email:regEmail.value,
+pass:regPass.value,
+age:regAge.value,
+weight:regWeight.value,
+height:regHeight.value,
+sex:regSex.value
 
 }
 
-localStorage.setItem(email,JSON.stringify(user))
+localStorage.setItem(user.email,JSON.stringify(user))
 
-alert("Cuenta creada correctamente")
+alert("Cuenta creada")
 
-document.getElementById("register").style.display="none"
-document.getElementById("login").style.display="block"
+showSection("login")
 
 }
 
 function login(){
 
-let email=document.getElementById("logEmail").value
-let pass=document.getElementById("logPass").value
+let email=logEmail.value
+let pass=logPass.value
 
 let data=localStorage.getItem(email)
 
@@ -79,51 +65,213 @@ showDashboard(user)
 
 function showDashboard(user){
 
-document.getElementById("login").style.display="none"
-document.getElementById("dashboard").style.display="block"
+showSection("dashboard")
 
 let imc=user.weight/((user.height/100)*(user.height/100))
 
-document.getElementById("imc").innerText="Tu IMC es: "+imc.toFixed(2)
+document.getElementById("imc").innerText="IMC: "+imc.toFixed(2)
 
 }
 
-function showRutina(){
+function guardarSalud(){
 
-document.getElementById("rutina").style.display="block"
+let salud={
 
-rutina.innerHTML=generateRoutine()
-
-}
-
-function showDieta(){
-
-document.getElementById("dieta").style.display="block"
-
-dieta.innerHTML=generateDiet()
+lesion:lesion.value,
+enfermedad:enfermedad.value,
+cirugia:cirugia.value
 
 }
 
-function showSalud(){
+localStorage.setItem("salud",JSON.stringify(salud))
 
-document.getElementById("salud").style.display="block"
+alert("Datos guardados")
 
-salud.innerHTML=
+}
 
-`<h2>Prevención</h2>
+function generarRutina(){
 
-<h3>Rabdomiólisis</h3>
-<p>Daño muscular severo causado por sobreentrenamiento extremo.</p>
+return `
 
-<h3>Sobreentrenamiento</h3>
-<p>Fatiga constante y disminución del rendimiento.</p>
+<h2>Rutina Semanal</h2>
 
-<h3>Golpe de calor</h3>
-<p>El cuerpo pierde capacidad de regular temperatura.</p>
+<h3>Lunes - Pecho</h3>
 
-<h3>Deshidratación</h3>
-<p>Pérdida excesiva de líquidos.</p>
+<p>Máquina: Press de banca</p>
+
+<p>Series: 4</p>
+
+<p>Repeticiones: 8</p>
+
+<p>Tiempo por serie: 40 segundos</p>
+
+<p>Descanso: 90 segundos</p>
+
+<h3>Martes - Espalda</h3>
+
+<p>Máquina: Jalón al pecho</p>
+
+<p>Series: 4</p>
+
+<p>Repeticiones: 10</p>
+
+<p>Tiempo por serie: 45 segundos</p>
+
+<p>Descanso: 90 segundos</p>
+
+<h3>Miércoles - Pierna</h3>
+
+<p>Máquina: Sentadilla guiada</p>
+
+<p>Series: 4</p>
+
+<p>Repeticiones: 10</p>
+
+<p>Tiempo por serie: 45 segundos</p>
+
+<p>Descanso: 120 segundos</p>
+
+<h3>Jueves - Hombro</h3>
+
+<p>Máquina: Press militar</p>
+
+<p>Series: 4</p>
+
+<p>Repeticiones: 8</p>
+
+<p>Descanso: 90 segundos</p>
+
+<h3>Viernes - Brazos</h3>
+
+<p>Máquina: Curl bíceps</p>
+
+<p>Series: 4</p>
+
+<p>Repeticiones: 10</p>
+
+<p>Descanso: 60 segundos</p>
+
+<h3>Sábado - Cardio</h3>
+
+<p>Caminadora</p>
+
+<p>Tiempo: 25 minutos</p>
+
+<h3>Domingo - Descanso</h3>
 
 `
 
 }
+
+function generarDieta(){
+
+return `
+
+<h2>Plan Alimenticio</h2>
+
+<h3>Indica tus alergias</h3>
+
+<input placeholder="Ej: lactosa, gluten">
+
+<h3>Lunes</h3>
+
+<h4>Desayuno</h4>
+
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+
+<p>Avena con fruta</p>
+
+<p>Ingredientes:</p>
+
+<p>60g avena</p>
+
+<p>1 plátano</p>
+
+<p>200ml leche</p>
+
+<h4>Comida</h4>
+
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836">
+
+<p>Pollo con arroz</p>
+
+<p>150g pollo</p>
+
+<p>100g arroz integral</p>
+
+<p>Verduras</p>
+
+<h4>Cena</h4>
+
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+
+<p>Ensalada con atún</p>
+
+<p>1 lata atún</p>
+
+<p>lechuga</p>
+
+<p>tomate</p>
+
+`
+
+}
+
+function generarPrevencion(){
+
+return `
+
+<h2>Prevención</h2>
+
+<img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b">
+
+<h3>Rabdomiólisis</h3>
+
+<p>Daño muscular severo causado por ejercicio extremo.</p>
+
+<p>Síntomas: dolor intenso, debilidad, orina oscura.</p>
+
+<h3>Sobreentrenamiento</h3>
+
+<p>Fatiga constante, bajo rendimiento y riesgo de lesión.</p>
+
+<h3>Golpe de calor</h3>
+
+<p>El cuerpo pierde capacidad de regular la temperatura.</p>
+
+<h3>Deshidratación</h3>
+
+<p>La falta de agua reduce el rendimiento físico.</p>
+
+`
+
+}
+
+document.addEventListener("click",function(e){
+
+if(e.target.innerText==="Rutina"){
+
+showSection("rutina")
+
+rutina.innerHTML=generarRutina()
+
+}
+
+if(e.target.innerText==="Plan Alimenticio"){
+
+showSection("dieta")
+
+dieta.innerHTML=generarDieta()
+
+}
+
+if(e.target.innerText==="Prevención"){
+
+showSection("prevencion")
+
+prevencion.innerHTML=generarPrevencion()
+
+}
+
+})
+
