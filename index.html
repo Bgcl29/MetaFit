@@ -3,6 +3,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +16,9 @@
 <body>
 
 <header>
+
 <h1>MetaFit</h1>
+
 </header>
 
 <div class="container">
@@ -47,11 +50,16 @@
 <input id="regHeight" placeholder="Altura (cm)">
 
 <select id="regSex">
+
 <option>Masculino</option>
+
 <option>Femenino</option>
+
 </select>
 
 <button onclick="register()">Registrarse</button>
+
+<button onclick="showSection('home')">⬅ Volver</button>
 
 </div>
 
@@ -65,23 +73,25 @@
 
 <button onclick="login()">Entrar</button>
 
+<button onclick="showSection('home')">⬅ Volver</button>
+
 </div>
 
 <div id="dashboard" class="hidden">
 
-<h2>Panel de Usuario</h2>
+<h2>Panel MetaFit</h2>
 
 <p id="imc"></p>
 
 <div class="menu">
 
+<div class="card" onclick="openRutina()">Rutina</div>
+
+<div class="card" onclick="openDieta()">Plan Alimenticio</div>
+
 <div class="card" onclick="showSection('patologias')">Patologías</div>
 
-<div class="card" onclick="showSection('rutina')">Rutina</div>
-
-<div class="card" onclick="showSection('dieta')">Plan Alimenticio</div>
-
-<div class="card" onclick="showSection('prevencion')">Prevención</div>
+<div class="card" onclick="openPrevencion()">Prevención</div>
 
 </div>
 
@@ -98,6 +108,8 @@
 <input id="cirugia" placeholder="Cirugías previas">
 
 <button onclick="guardarSalud()">Guardar</button>
+
+<button onclick="showSection('dashboard')">⬅ Volver al menú</button>
 
 </div>
 
