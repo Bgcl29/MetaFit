@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MetaFit</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>MetaFit</h1>
+
+</header>
+
+<div class="container">
+
+<div id="home">
+
+<h2>Bienvenido</h2>
+
+<button onclick="showRegister()">Crear cuenta</button>
+
+<button onclick="showLogin()">Iniciar sesión</button>
+
+</div>
+
+<div id="register" class="hidden">
+
+<h2>Registro</h2>
+
+<input id="regName" placeholder="Nombre completo">
+<input id="regEmail" placeholder="Correo">
+<input id="regPass" type="password" placeholder="Contraseña">
+
+<input id="regAge" placeholder="Edad">
+<input id="regWeight" placeholder="Peso (kg)">
+<input id="regHeight" placeholder="Altura (cm)">
+
+<select id="regSex">
+<option>Masculino</option>
+<option>Femenino</option>
+</select>
+
+<button onclick="register()">Registrarse</button>
+
+</div>
+
+<div id="login" class="hidden">
+
+<h2>Iniciar sesión</h2>
+
+<input id="logEmail" placeholder="Correo">
+<input id="logPass" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Entrar</button>
+
+</div>
+
+<div id="dashboard" class="hidden">
+
+<h2>Panel MetaFit</h2>
+
+<p id="imc"></p>
+
+<div class="menu">
+
+<div class="card" onclick="showRutina()">Rutina IA</div>
+
+<div class="card" onclick="showDieta()">Plan Alimenticio</div>
+
+<div class="card" onclick="showSalud()">Prevención</div>
+
+</div>
+
+</div>
+
+<div id="rutina" class="hidden"></div>
+
+<div id="dieta" class="hidden"></div>
+
+<div id="salud" class="hidden"></div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script src="ai.js"></script>
+
+</body>
+
+</html>
