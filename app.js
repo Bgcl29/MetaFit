@@ -1,12 +1,13 @@
-let usuarioActual=null
-let pesos=[]
+let usuarioActual = null
+let pesos = []
+let grafica = null
 
 function showSection(id){
 
-let sections=["home","register","login","dashboard","patologias","rutina","dieta","prevencion","calendario","editarCuenta","progreso"]
+let sections = ["home","register","login","dashboard","patologias","rutina","dieta","prevencion","calendario","editarCuenta","progreso"]
 
 sections.forEach(sec=>{
-let el=document.getElementById(sec)
+let el = document.getElementById(sec)
 if(el) el.style.display="none"
 })
 
@@ -16,17 +17,19 @@ document.getElementById(id).style.display="block"
 
 function register(){
 
-let user={
-name:regName.value,
-email:regEmail.value,
-pass:regPass.value,
-age:regAge.value,
-weight:regWeight.value,
-height:regHeight.value,
-sex:regSex.value
+let user = {
+
+name: document.getElementById("regName").value,
+email: document.getElementById("regEmail").value,
+pass: document.getElementById("regPass").value,
+age: document.getElementById("regAge").value,
+weight: document.getElementById("regWeight").value,
+height: document.getElementById("regHeight").value,
+sex: document.getElementById("regSex").value
+
 }
 
-localStorage.setItem(user.email,JSON.stringify(user))
+localStorage.setItem(user.email, JSON.stringify(user))
 
 alert("Cuenta creada")
 
@@ -36,28 +39,28 @@ showSection("login")
 
 function login(){
 
-let email=logEmail.value
-let pass=logPass.value
+let email = document.getElementById("logEmail").value
+let pass = document.getElementById("logPass").value
 
-let data=localStorage.getItem(email)
+let data = localStorage.getItem(email)
 
 if(!data){
 alert("Usuario no existe")
 return
 }
 
-let user=JSON.parse(data)
+let user = JSON.parse(data)
 
-if(user.pass!==pass){
+if(user.pass !== pass){
 alert("Contraseña incorrecta")
 return
 }
 
-usuarioActual=user
+usuarioActual = user
 
-let imc=user.weight/((user.height/100)*(user.height/100))
+let imc = user.weight / ((user.height/100)*(user.height/100))
 
-document.getElementById("imc").innerText="📊 IMC: "+imc.toFixed(2)
+document.getElementById("imc").innerText = "📊 IMC: " + imc.toFixed(2)
 
 showSection("dashboard")
 
@@ -65,13 +68,15 @@ showSection("dashboard")
 
 function guardarSalud(){
 
-let salud={
-lesion:lesion.value,
-enfermedad:enfermedad.value,
-cirugia:cirugia.value
+let salud = {
+
+lesion: document.getElementById("lesion").value,
+enfermedad: document.getElementById("enfermedad").value,
+cirugia: document.getElementById("cirugia").value
+
 }
 
-localStorage.setItem("salud",JSON.stringify(salud))
+localStorage.setItem("salud", JSON.stringify(salud))
 
 alert("Datos guardados")
 
@@ -81,21 +86,22 @@ function openRutina(){
 
 showSection("rutina")
 
-rutina.innerHTML=`
+document.getElementById("rutina").innerHTML = `
 
 <h2>💪 Rutina semanal</h2>
 
 <h3>Lunes - Pecho</h3>
-<p>Press banca — 4x8 — descanso 90s</p>
-<p>Aperturas con mancuernas — 3x12</p>
+<p>Press banca — 4 series — 8 repeticiones</p>
+<p>Descanso: 90 segundos</p>
+<p>Instrucción: bajar la barra al pecho y subir controlado</p>
 
 <h3>Martes - Espalda</h3>
 <p>Jalón al pecho — 4x10</p>
-<p>Remo máquina — 3x10</p>
+<p>Remo en máquina — 3x10</p>
 
 <h3>Miércoles - Pierna</h3>
 <p>Sentadilla guiada — 4x10</p>
-<p>Prensa — 4x12</p>
+<p>Prensa de pierna — 4x12</p>
 
 <h3>Jueves - Hombro</h3>
 <p>Press militar — 4x8</p>
@@ -121,13 +127,13 @@ function openDieta(){
 
 showSection("dieta")
 
-dieta.innerHTML=`
+document.getElementById("dieta").innerHTML = `
 
-<h2>🥗 Plan Alimenticio IA</h2>
+<h2>🥗 Plan Alimenticio</h2>
 
 <input id="alergias" placeholder="Escribe tus alergias">
 
-<button onclick="generarDieta()">Generar</button>
+<button onclick="generarDieta()">Generar plan</button>
 
 <div id="plan"></div>
 
@@ -143,9 +149,9 @@ let desayunos=[
 "Avena con plátano",
 "Omelette de claras",
 "Yogurt con granola",
-"Pan integral con aguacate",
+"Tostadas integrales con aguacate",
 "Batido de proteína",
-"Tostadas integrales",
+"Pan integral con crema de cacahuate",
 "Huevos con espinaca"
 ]
 
@@ -185,7 +191,64 @@ html+=`
 
 }
 
-plan.innerHTML=html
+document.getElementById("plan").innerHTML=html
+
+}
+
+function openPrevencion(){
+
+showSection("prevencion")
+
+document.getElementById("prevencion").innerHTML=`
+
+<h2>⚠ Prevención</h2>
+
+<h3>Rabdomiólisis</h3>
+<p>Daño muscular severo causado por esfuerzo extremo.</p>
+
+<h3>Lesiones por sobrecarga</h3>
+<p>Tendinitis, desgarros musculares, dolor articular.</p>
+
+<h3>Golpe de calor</h3>
+<p>El cuerpo pierde la capacidad de regular la temperatura.</p>
+
+<h3>Deshidratación</h3>
+<p>Pérdida excesiva de líquidos durante el ejercicio.</p>
+
+<h3>Sobreentrenamiento</h3>
+<p>Fatiga crónica por falta de descanso.</p>
+
+<button onclick="showSection('dashboard')">⬅ Volver</button>
+
+`
+
+}
+
+function openCalendario(){
+
+showSection("calendario")
+
+document.getElementById("calendario").innerHTML=`
+
+<h2>📅 Calendario</h2>
+
+<table>
+
+<tr><th>Día</th><th>Entrenamiento</th></tr>
+
+<tr><td>Lunes</td><td>Pecho</td></tr>
+<tr><td>Martes</td><td>Espalda</td></tr>
+<tr><td>Miércoles</td><td>Pierna</td></tr>
+<tr><td>Jueves</td><td>Hombro</td></tr>
+<tr><td>Viernes</td><td>Brazos</td></tr>
+<tr><td>Sábado</td><td>Cardio</td></tr>
+<tr><td>Domingo</td><td>Descanso</td></tr>
+
+</table>
+
+<button onclick="showSection('dashboard')">⬅ Volver</button>
+
+`
 
 }
 
@@ -193,7 +256,7 @@ function editarCuenta(){
 
 showSection("editarCuenta")
 
-editarCuenta.innerHTML=`
+document.getElementById("editarCuenta").innerHTML=`
 
 <h2>⚙ Editar Cuenta</h2>
 
@@ -205,7 +268,7 @@ editarCuenta.innerHTML=`
 
 <input id="nuevaAltura" placeholder="Nueva altura">
 
-<button onclick="guardarCambios()">Guardar</button>
+<button onclick="guardarCambios()">Guardar cambios</button>
 
 <button onclick="showSection('dashboard')">⬅ Volver</button>
 
@@ -215,12 +278,23 @@ editarCuenta.innerHTML=`
 
 function guardarCambios(){
 
-usuarioActual.name=nuevoNombre.value || usuarioActual.name
-usuarioActual.age=nuevaEdad.value || usuarioActual.age
-usuarioActual.weight=nuevoPeso.value || usuarioActual.weight
-usuarioActual.height=nuevaAltura.value || usuarioActual.height
+if(document.getElementById("nuevoNombre").value){
+usuarioActual.name=document.getElementById("nuevoNombre").value
+}
 
-localStorage.setItem(usuarioActual.email,JSON.stringify(usuarioActual))
+if(document.getElementById("nuevaEdad").value){
+usuarioActual.age=document.getElementById("nuevaEdad").value
+}
+
+if(document.getElementById("nuevoPeso").value){
+usuarioActual.weight=document.getElementById("nuevoPeso").value
+}
+
+if(document.getElementById("nuevaAltura").value){
+usuarioActual.height=document.getElementById("nuevaAltura").value
+}
+
+localStorage.setItem(usuarioActual.email, JSON.stringify(usuarioActual))
 
 alert("Datos actualizados")
 
@@ -230,13 +304,13 @@ function openProgreso(){
 
 showSection("progreso")
 
-progreso.innerHTML=`
+document.getElementById("progreso").innerHTML=`
 
-<h2>📊 Progreso</h2>
+<h2>📊 Progreso semanal</h2>
 
 <input id="pesoSemana" placeholder="Peso esta semana">
 
-<button onclick="agregarPeso()">Agregar</button>
+<button onclick="agregarPeso()">Agregar peso</button>
 
 <canvas id="grafica"></canvas>
 
@@ -244,25 +318,38 @@ progreso.innerHTML=`
 
 `
 
+crearGrafica()
+
+}
+
+function crearGrafica(){
+
+let ctx=document.getElementById("grafica")
+
+grafica=new Chart(ctx,{
+
+type:"line",
+
+data:{
+labels:[],
+datasets:[{
+label:"Peso corporal",
+data:[]
+}]
+}
+
+})
+
 }
 
 function agregarPeso(){
 
-let peso=parseFloat(pesoSemana.value)
+let peso=parseFloat(document.getElementById("pesoSemana").value)
 
-pesos.push(peso)
+grafica.data.labels.push("Semana "+(grafica.data.labels.length+1))
 
-let ctx=document.getElementById("grafica")
+grafica.data.datasets[0].data.push(peso)
 
-new Chart(ctx,{
-type:"line",
-data:{
-labels:pesos.map((_,i)=>"Semana "+(i+1)),
-datasets:[{
-label:"Peso corporal",
-data:pesos
-}]
-}
-})
+grafica.update()
 
 }
