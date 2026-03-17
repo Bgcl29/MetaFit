@@ -1,95 +1,129 @@
-body{
+function showRegister(){
 
-background:#0f0f0f;
-color:white;
-font-family:Arial;
-margin:0;
-text-align:center;
+document.getElementById("home").style.display="none"
+document.getElementById("register").style.display="block"
 
 }
 
-header{
+function showLogin(){
 
-background:black;
-color:#FFD700;
-padding:20px;
-font-size:24px;
+document.getElementById("home").style.display="none"
+document.getElementById("login").style.display="block"
 
 }
 
-.container{
+function register(){
 
-max-width:420px;
-margin:auto;
-padding:20px;
+let name=document.getElementById("regName").value
+let email=document.getElementById("regEmail").value
+let pass=document.getElementById("regPass").value
+let age=document.getElementById("regAge").value
+let weight=document.getElementById("regWeight").value
+let height=document.getElementById("regHeight").value
+let sex=document.getElementById("regSex").value
 
-}
+if(!name || !email || !pass){
 
-input,select{
-
-width:90%;
-padding:12px;
-margin:8px;
-border-radius:8px;
-border:none;
-
-}
-
-button{
-
-padding:12px 20px;
-margin:10px;
-background:linear-gradient(45deg,#FFD700,#FFC107);
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
+alert("Completa todos los campos")
+return
 
 }
 
-.menu{
+let user={
 
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-top:20px;
-
-}
-
-.card{
-
-background:#1c1c1c;
-padding:20px;
-border-radius:12px;
-cursor:pointer;
-transition:0.3s;
+name:name,
+email:email,
+pass:pass,
+age:age,
+weight:weight,
+height:height,
+sex:sex
 
 }
 
-.card:hover{
+localStorage.setItem(email,JSON.stringify(user))
 
-transform:scale(1.05);
+alert("Cuenta creada correctamente")
 
-}
-
-.hidden{
-
-display:none;
+document.getElementById("register").style.display="none"
+document.getElementById("login").style.display="block"
 
 }
 
-iframe{
+function login(){
 
-width:100%;
-height:200px;
-border-radius:10px;
-margin-top:10px;
+let email=document.getElementById("logEmail").value
+let pass=document.getElementById("logPass").value
+
+let data=localStorage.getItem(email)
+
+if(!data){
+
+alert("Usuario no existe")
+return
 
 }
 
-img{
+let user=JSON.parse(data)
 
-width:100%;
-border-radius:10px;
+if(user.pass!==pass){
+
+alert("Contraseña incorrecta")
+return
+
+}
+
+showDashboard(user)
+
+}
+
+function showDashboard(user){
+
+document.getElementById("login").style.display="none"
+document.getElementById("dashboard").style.display="block"
+
+let imc=user.weight/((user.height/100)*(user.height/100))
+
+document.getElementById("imc").innerText="Tu IMC es: "+imc.toFixed(2)
+
+}
+
+function showRutina(){
+
+document.getElementById("rutina").style.display="block"
+
+rutina.innerHTML=generateRoutine()
+
+}
+
+function showDieta(){
+
+document.getElementById("dieta").style.display="block"
+
+dieta.innerHTML=generateDiet()
+
+}
+
+function showSalud(){
+
+document.getElementById("salud").style.display="block"
+
+salud.innerHTML=
+
+`<h2>Prevención</h2>
+
+<h3>Rabdomiólisis</h3>
+<p>Daño muscular severo causado por sobreentrenamiento extremo.</p>
+
+<h3>Sobreentrenamiento</h3>
+<p>Fatiga constante y disminución del rendimiento.</p>
+
+<h3>Golpe de calor</h3>
+<p>El cuerpo pierde capacidad de regular temperatura.</p>
+
+<h3>Deshidratación</h3>
+<p>Pérdida excesiva de líquidos.</p>
+
+`
 
 }
